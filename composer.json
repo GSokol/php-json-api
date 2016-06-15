@@ -1,5 +1,5 @@
 {
-    "name": "nilportugues/json-api",
+    "name": "gsokol/json-api",
     "type": "library",
     "description": "Serializer transformers outputting valid API responses in JSON, JSON API and HAL+JSON API formats.",
     "keywords": ["json", "api", "jsonapi", "serializer", "transformer", "psr7", "response"],
@@ -10,6 +10,11 @@
             "name": "Nil Portugués Calderó",
             "email": "contact@nilportugues.com",
             "role": "Project Lead Developer"
+        },
+        {
+            "name": "Grigorii Sokolik",
+            "email": "g.sokol99@g-sokol.info",
+            "role": "Customizer"
         }
     ],
     "require": {
