@@ -52,7 +52,7 @@ class CreateResource
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function get(array $data, $className, callable $callable)
+    public function get(array $data, $className, callable $callable, callable $urlCallable)
     {
         try {
             DataObject::assertPost($data, $this->serializer, $className, $this->errorBag);
@@ -60,6 +60,7 @@ class CreateResource
             $values = DataObject::getAttributes($data, $this->serializer);
             $model = $callable($data, $values, $this->errorBag);
 
+            $this->serializer->getTransformer()->setSelfUrl($urlCallable());
             $response = $this->resourceCreated($this->serializer->serialize($model));
         } catch (Exception $e) {
             $response = $this->getErrorResponse($e, $this->errorBag);
