@@ -75,7 +75,7 @@ class GetResource
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function get($id, $className, callable $callable)
+    public function get($id, $className, callable $callable, callable $getUrl)
     {
         try {
             QueryObject::assert($this->serializer, $this->fields, $this->included, new Sorting(), $this->errorBag, $className);
@@ -87,6 +87,7 @@ class GetResource
                 return $this->resourceNotFound(new ErrorBag([new NotFoundError($mapping->getClassAlias(), $id)]));
             }
 
+            $this->serializer->getTransformer()->setSelfUrl($getUrl());
             $response = $this->response($this->serializer->serialize($data, $this->fields, $this->included));
         } catch (Exception $e) {
             $response = $this->getErrorResponse($e);
