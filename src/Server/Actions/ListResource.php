@@ -109,6 +109,7 @@ class ListResource
                 $this->errorBag,
                 $className
             );
+            $results = $resultsCallable();
             $totalAmount = $totalAmountCallable();
 
             if ($totalAmount > 0 && $this->page->size() > 0 && $this->page->number() > ceil($totalAmount / $this->page->size())) {
@@ -127,8 +128,6 @@ class ListResource
                 $this->included,
                 $this->filters
             );
-
-            $results = $resultsCallable();
 
             $paginatedResource = new PaginatedResource(
                 $this->serializer->serialize($results, $this->fields, $this->included),
